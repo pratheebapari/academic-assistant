@@ -22,7 +22,7 @@ function App() {
 
   const fetchChats = async () => {
     try {
-      const res = await fetch("https://academic-assistant-backend.onrender.com");
+      const res = await fetch("https://academic-assistant-backend-su6h.onrender.com");
       const data = await res.json();
       setChats(data);
     } catch (e) {}
@@ -43,7 +43,7 @@ function App() {
 
   const deleteChat = async (chatId, e) => {
     e.stopPropagation();
-    await fetch(`https://academic-assistant-backend.onrender.com/history/${chatId}`, { method: "DELETE" });
+    await fetch(`https://academic-assistant-backend-su6h.onrender.com/history/${chatId}`, { method: "DELETE" });
     fetchChats();
     if (chatId === currentChatId) newChat();
   };
@@ -55,7 +55,7 @@ function App() {
     const formData = new FormData();
     formData.append("file", f);
     try {
-      const res = await fetch("https://academic-assistant-backend.onrender.com/upload", { method: "POST", body: formData });
+      const res = await fetch("https://academic-assistant-backend-su6h.onrender.com/upload", { method: "POST", body: formData });
       const data = await res.json();
       setUploadMsg("✓ " + data.message);
     } catch (e) { setUploadMsg("Upload failed."); }
@@ -69,7 +69,7 @@ function App() {
     setLoading(true);
     setMessages((prev) => [...prev, { role: "assistant", text: "" }]);
     try {
-      const res = await fetch("https://academic-assistant-backend.onrender.com/ask", {
+      const res = await fetch("https://academic-assistant-backend-su6h.onrender.com/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: userQuestion, chat_id: currentChatId }),
